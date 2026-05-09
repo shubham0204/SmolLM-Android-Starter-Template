@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "io.shubham0204.startwithsmollm"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
@@ -50,6 +50,10 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.compose.material3.icons.extended)
     implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.4.0")
+
+    // TODO: Step 1
+    implementation(files("libs/smollm-debug.aar"))
+
     testImplementation(libs.junit)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
