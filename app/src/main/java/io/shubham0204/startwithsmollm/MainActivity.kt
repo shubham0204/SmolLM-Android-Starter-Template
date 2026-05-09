@@ -55,7 +55,7 @@ class MainActivity : ComponentActivity() {
     @Composable
     private fun ScreenUI(uiState: ChatUIState) {
         Column(modifier = Modifier.fillMaxWidth()) {
-            ChatMessagesList(uiState.messages)
+            ChatMessagesList(uiState.messages, uiState.modelInferenceState)
             MessageInput(
                 uiState.modelLoadingState,
                 onQuerySubmit = { query ->
@@ -66,10 +66,21 @@ class MainActivity : ComponentActivity() {
     }
 
     @Composable
-    private fun ColumnScope.ChatMessagesList(messages: ImmutableList<ChatMessage>) {
+    private fun ColumnScope.ChatMessagesList(
+        messages: ImmutableList<ChatMessage>,
+        modelInferenceState: ModelInferenceState
+    ) {
         LazyColumn(modifier = Modifier.weight(1f)) {
             items(messages) { message ->
                 ChatMessageListItem(message)
+            }
+            if (modelInferenceState == ModelInferenceState.LOADING) {
+                item {
+                    Text("Thinking...",
+                        color = Color.LightGray,
+                        modifier = Modifier.padding(horizontal = 16.dp)
+                    )
+                }
             }
         }
     }
